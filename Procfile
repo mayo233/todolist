@@ -1,5 +1,1 @@
-web:
-gunicorn
-thunder.wsgi
---log-file
--
+web: gunicorn thunder.wsgi --log-file -
