@@ -4,11 +4,15 @@
     <base target="_top">
   </head>
   <body>
-    <div class='timer'>00:00.000</div>
-    <button class='start-stop' name = "start">スタート</button>
-    <button class='stop' name = "stop">ストップ</button>
-    <button class='reset'>リセット</button>
-    <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
+    <!-- <form method="POST">
+      {% csrf_token %} -->
+      <div class='timer'>00:00.000</div>
+      <button class='start-stop' name = "start">スタート</button>
+      <!-- <button class='stop' name = "stop">ストップ</button> -->
+      <button class='reset'>リセット</button>
+      <input type="submit" value="保存">
+    <!-- </form> -->
+    <!-- <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?> -->
 
   <a href="{% url 'hello' %}">戻る</a>
 
@@ -24,8 +28,8 @@
       }
 
       mount() {
-          const startStopElement = document.querySelector('.start-stop');
-          const StopElement = document.querySelector('.stop')
+        const startStopElement = document.querySelector('.start-stop');
+        const StopElement = document.querySelector('.stop');
         const resetElement = document.querySelector('.reset');
         //startStopボタンを押したとき
         startStopElement.addEventListener("click", () => {
@@ -33,6 +37,7 @@
           if(this.stopwatch.isStop) {
             //ストップウォッチを動かす
             this.stopwatch.start();
+            startStopElement.textContent = "ストップ";
           //ストップウォッチが動いているとき
           } else {
             //ストップウォッチを止める
@@ -45,7 +50,7 @@
             if(this.stopwatch.isStop) {
                 this.stopwatch.start();
                 }
-             else {
+            else {
               this.stopwatch.stop();
             }
         });
@@ -54,6 +59,7 @@
           //ストップウォッチが止まっているとき
           if(this.stopwatch.isStop){
             //ストップウォッチをリセット
+            console.log('reset');
             this.stopwatch.reset();
           }
         });
