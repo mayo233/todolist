@@ -11,7 +11,7 @@ app_name = 'todo'
 # Create your views here.
 def index(request):
     todos = Todo.objects.all()
-    return render(request, 'index.html', {'todos': todos})
+    return render(request, 'todo/index.html', {'todos': todos})
 
 def add(request):
     todo = Todo(
@@ -20,10 +20,10 @@ def add(request):
         deadline=datetime.strptime(request.POST['deadline'], '%Y-%m-%dT%H:%M')
     )
     todo.save()
-    return HttpResponseRedirect(reverse('index', args=()))
+    return HttpResponseRedirect(reverse('todo_index', args=()))
 
 @require_POST
 def remove(request, todo_id):
     todo = get_object_or_404(Todo, pk = todo_id)
     todo.delete()
-    return HttpResponseRedirect(reverse('index', args=()))
+    return HttpResponseRedirect(reverse('todo_index', args=()))

@@ -12,7 +12,7 @@
 </head>
 <body>
   <h3>作成</h3>
-  <form action="{% url 'add' %}" method="POST">
+  <form action="{% url 'todo_add' %}" method="POST">
     {% csrf_token %}
     <div>
       <label for="form_title">タイトル</label>
@@ -26,8 +26,6 @@
       <label for="form_deadline">期限</label>
       <input id="form_deadline" type="datetime-local" name="deadline" required>
     </div>
-
-    <input type="submit" value="作成">
   </form>
 
   <h3>ToDoリスト</h3>
@@ -41,7 +39,7 @@
           {{ todo.text }}
         </td>
         <td>
-          <form action="{% url 'remove' todo.pk %}" method="POST">
+          <form action="{% url 'todo_remove' todo.pk %}" method="POST">
             {% csrf_token %}
             <input type="submit" value="削除">
           </form>
