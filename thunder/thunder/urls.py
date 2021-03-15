@@ -18,5 +18,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('liff.urls')),
-    path('todo', include('todo.urls')),
+    path('todo/', include('todo.urls')),
 ]
