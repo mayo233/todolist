@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'thunder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'name',
-        'USER': 'user',
-        'PASSWORD': '',
-        'HOST': 'host',
-        'PORT': '',
+        'NAME': 'thunder',
+        'USER': 'thunder',
+        'PASSWORD': 'thunder0315',
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
 

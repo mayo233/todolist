@@ -1,0 +1,8 @@
+heroku
+app_name: thunder-for-hakkutsu
+url: https://thunder-for-hakkutsu.herokuapp.com/
+
+【superuser】
+username: thunder
+email: honda.ichigo@outlook.jp
+password: thunder0315
