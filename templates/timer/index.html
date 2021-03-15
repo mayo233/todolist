@@ -46,20 +46,19 @@
             startStopElement.textContent = "スタート";
           }
         });
-        stopElement.addEventListener("click", () => {
-            if(this.stopwatch.isStop) {
-                this.stopwatch.start();
-                }
-            else {
-              this.stopwatch.stop();
-            }
-        });
+        // stopElement.addEventListener("click", () => {
+        //     if(this.stopwatch.isStop) {
+        //         this.stopwatch.start();
+        //         }
+        //     else {
+        //       this.stopwatch.stop();
+        //     }
+        // });
         //resetボタンを押したとき
         resetElement.addEventListener("click", () => {
           //ストップウォッチが止まっているとき
           if(this.stopwatch.isStop){
             //ストップウォッチをリセット
-            console.log('reset');
             this.stopwatch.reset();
           }
         });
