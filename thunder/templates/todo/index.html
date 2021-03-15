@@ -7,11 +7,35 @@
   <title>ToDoリスト</title>
 </head>
 <body>
-  <h3>ToDoリスト</h3>
-  <ul>
-    {% for todo in todos %}
+  <h3>作成</h3>
+  <form action="{% url 'add' %}" method="POST">
+    {% csrf_token %}
+    <div>
+      <label for="form_title">タイトル</label>
+      <input id="form_title" type="text" name="title" required>
+    </div>
+    <div>
+      <label for="form_text">タスク</label>
+      <textarea id="form_text" name="text" placeholder="タスクの詳細を入力"></textarea>
+    </div>
+    <div>
+      <label for="form_deadline">期限</label>
+      <input id="form_deadline" type="datetime-local" name="deadline">
+    </div>
 
-    {% endfor %}
-  </ul>
+    <input type="submit" value="作成">
+  </form>
+
+  <h3>ToDoリスト</h3>
+  {% for todo in todos %}
+    <li>
+      {{ todo.title }}
+      {{ todo.text }}
+
+      <a href="{% url 'remove' todo.id %}">
+        削除
+      </a>
+    </li>
+  {% endfor %}
 </body>
 </html>
