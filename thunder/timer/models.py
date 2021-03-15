@@ -1,3 +1,5 @@
 from django.db import models
-
-# Create your models here.
+class timer(models.Model):
+    start = models.IntegerField()
+    stop = models.IntegerField()
+    time = models.IntegerField()
