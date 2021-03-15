@@ -1,4 +1,4 @@
 web:
 gunicorn
-thunder.wsg
+thunder-for-hakkutsu.wsg
 --log-file -
