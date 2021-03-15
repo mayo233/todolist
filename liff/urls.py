@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='hello'),
+    path('callback/', views.callback, name='callback'),
 ]
