@@ -17,7 +17,7 @@ def callback(request):
         line_user_id = events[0]['source']['userId']
 
         # チャネル設定のWeb hook接続確認時にはここ。このIDで見に来る。
-        if line_user_id == 'thunder_auth':
+        if line_user_id == 'Udeadbeefdeadbeefdeadbeefdeadbeef':
             pass
 
         # 友達追加時・ブロック解除時
@@ -29,4 +29,3 @@ def callback(request):
             LinePush.objects.filter(user_id=line_user_id).delete()
 
     return HttpResponse()
-    
