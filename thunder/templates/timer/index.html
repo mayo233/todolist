@@ -8,6 +8,15 @@
     <button class='start-stop' name = "start">スタート</button>
     <button class='stop' name = "stop">ストップ</button>
     <button class='reset'>リセット</button>
+    <input type="submit" value="作成" onclick="click()">
+    <input type="hidden" id="total-time" name="total-time">
+    <script>
+      function click(){
+        var min,sec,minsec;
+        var time=min + ':' + sec + ':' + minsec;
+        getElementById('total＿time').value = time;
+      }
+    </script>
     <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?>
   </body>
 </html>
