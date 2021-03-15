@@ -17,5 +17,6 @@ Including another URLconf
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include('liff.urls'))
+    # path('', include('liff.urls')),
+    path('', include('todo.urls')),
 ]
