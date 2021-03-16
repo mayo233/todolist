@@ -1,6 +1,14 @@
-
+<!DOCTYPE html>
+<head>
+    <base target="_top">
+  </head>
+  <body>
     {% for data in records %}
     {{ data.id }}
     {{ data.time }}
     {{ data.created_at }}<br>
     {% endfor %}
+  </body>
+  <a href="{% url 'hello' %}">戻る</a>
+
+</html>

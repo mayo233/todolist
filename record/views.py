@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from timer.models import Timer
 
 def index(request):
     # テスト用
