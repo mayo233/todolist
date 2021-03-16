@@ -1,29 +1,35 @@
-import json
-from django.http import HttpResponseBadRequest, HttpResponse
+from django.shortcuts import render
+from django.http import HttpResponseForbidden, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import LinePush
+from linebot import (LineBotApi, WebhookHandler)
+from linebot.exceptions import (InvalidSignatureError)
+from linebot.models import (
+    MessageEvent,
+    TextMessage,
+    TextSendMessage,
+)
+import os
 
-# line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
-# parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
+LINE_CHANNEL_ACCESS_TOKEN = "ti9/qdZKQKXbquJHvAYmZ9SQp7AlEi7fqbfMLVJVHjz3eahMPuKwkcGlnctj7eQYq2RuDzVEzHQCU20cRWdwfBcb74Ekb0HsDVRdh+RUxfx9D+1523lDzLzLoeYMvm0vjTCahwgBuvszoDQueDUoEQdB04t89/1O/w1cDnyilFU="
+LINE_CHANNEL_SECRET = "5fad41bf022893c1e8e5c27cb9dd348a"
 
-# Create your views here.
+line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(LINE_CHANNEL_SECRET)
+
+
 @csrf_exempt
 def callback(request):
-    if request.method == 'POST':
-        request_json = json.loads(request.body.decode('utf-8'))
-        events = request_json['events']
-        line_user_id = events[0]['source']['userId']
+    signature = request.META['HTTP_X_LINE_SIGNATURE']
+    body = request.body.decode('utf-8')
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        HttpResponseForbidden()
+    return HttpResponse('OK', status=200)
 
-        # チャネル設定のWeb hook接続確認時にはここ。このIDで見に来る。
-        if line_user_id == 'Udeadbeefdeadbeefdeadbeefdeadbeef':
-            pass
 
-        # 友達追加時・ブロック解除時
-        elif events[0]['type'] == 'follow':
-            LinePush.objects.create(user_id=line_user_id)
-
-        # アカウントがブロックされたとき
-        elif events[0]['type'] == 'unfollow':
-            LinePush.objects.filter(user_id=line_user_id).delete()
-
-    return HttpResponse()
+# オウム返し
+@handler.add(MessageEvent, message=TextMessage)
+def handle_text_message(event):
+    line_bot_api.reply_message(event.reply_token,
+                               TextSendMessage(text=event.message.text))

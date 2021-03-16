@@ -153,4 +153,4 @@ DATABASES['default'].update(db_from_env)
 
 LINE_CHANNEL_SECRET = "5fad41bf022893c1e8e5c27cb9dd348a"
 LINE_REDIRECT_URL = "https://thunder-for-hakkutsu.herokuapp.com/callback/"
-LINE_CHANNEL_ACCESS_TOKEN = "ti9 / qdZKQKXbquJHvAYmZ9SQp7AlEi7fqbfMLVJVHjz3eahMPuKwkcGlnctj7eQYq2RuDzVEzHQCU20cRWdwfBcb74Ekb0HsDVRdh + RUxfx​​9D + 1523l"
+LINE_CHANNEL_ACCESS_TOKEN = "ti9/qdZKQKXbquJHvAYmZ9SQp7AlEi7fqbfMLVJVHjz3eahMPuKwkcGlnctj7eQYq2RuDzVEzHQCU20cRWdwfBcb74Ekb0HsDVRdh+RUxfx9D+1523lDzLzLoeYMvm0vjTCahwgBuvszoDQueDUoEQdB04t89/1O/w1cDnyilFU="
