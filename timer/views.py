@@ -10,6 +10,7 @@ def index(request):
     records = Timer.objects.all()
     return render(request, 'timer/index.html', {'records': records})
 
+
 def store(request):
     timer = Timer(
         time = request.POST['time'],
