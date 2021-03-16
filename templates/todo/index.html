@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ToDoリスト</title>
-
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.1.13/sdk.js"></script>
   <!-- <link rel="stylesheet" href="../static/css/todo.css"> -->
 </head>
 <body>
@@ -30,7 +30,7 @@
       <input id="form_deadline" type="datetime-local" name="deadline" required>
     </div>
 
-    <input type="submit" value="作成">
+    <input class="create" type="submit" value="作成">
   </form>
 
   <h3>ToDoリスト</h3>
@@ -55,5 +55,22 @@
   </table>
 
   <a href="{% url 'hello' %}">戻る</a>
+
+<script>
+  document.querySelector('.create').addEventListener('click', function() {
+    if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Hello, World!"
+        }]).then(function() {
+            window.alert('Message sent');
+        }).catch(function(error) {
+            window.alert('Error sending message: ' + error);
+        });
+    }
+});
+</script>
 </body>
 </html>

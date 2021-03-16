@@ -151,6 +151,8 @@ if not DEBUG:
 
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
+DATE_FORMAT= "G時i分s秒"
+USE_L10N = False
 
 LINE_CHANNEL_SECRET = "5fad41bf022893c1e8e5c27cb9dd348a"
 LINE_REDIRECT_URL = "https://thunder-for-hakkutsu.herokuapp.com/callback/"
