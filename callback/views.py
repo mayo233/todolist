@@ -14,23 +14,48 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 # Create your views here.
 @csrf_exempt
 def callback(request):
-    if request.method == 'POST':
-        signature = request.META['HTTP_X_LINE_SIGNATURE']
-        body = request.body.decode('utf-8')
+    if request.method != 'POST':
+        return HttpResponse('ん？なんやようか？', status=405)
 
-        # try:
+    signature = request.META['HTTP_X_LINE_SIGNATURE']
+    body = request.body.decode('utf-8')
+    try:
         events = parser.parse(body, signature)
-        # except InvalidSignatureError:
-        #     return HttpResponseForbidden()
-        # except LineBotApiError:
-        #     return HttpResponseBadRequest()
-
-        for event in events:
-            if isinstance(event, MessageEvent):
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=event.message.text)
-                )
-        return HttpResponse()
-    else:
+    except InvalidSignatureError:
+        return HttpResponseForbidden()
+    except LineBotApiError:
         return HttpResponseBadRequest()
+
+    for event in events:
+        if not isinstance(event, MessageEvent):
+            continue
+        if not isinstance(event.message, TextMessage):
+            continue
+
+        text_send_message = TextSendMessage(text=event.message.text)
+        line_bot_api.reply_message(
+            event.reply_token,
+            text_send_message
+        )
+
+    return HttpResponse(status=200)
+    # if request.method == 'POST':
+    #     signature = request.META['HTTP_X_LINE_SIGNATURE']
+    #     body = request.body.decode('utf-8')
+
+    #     try:
+    #         events = parser.parse(body, signature)
+    #     except InvalidSignatureError:
+    #         return HttpResponseForbidden()
+    #     except LineBotApiError:
+    #         return HttpResponseBadRequest()
+
+    #     for event in events:
+    #         if isinstance(event, MessageEvent):
+    #             line_bot_api.reply_message(
+    #                 event.reply_token,
+    #                 TextSendMessage(text=event.message.text)
+    #             )
+    #     return HttpResponse()
+    # else:
+    #     return HttpResponseBadRequest()
