@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ようこそ!</title>
+
+  <!-- <link rel="stylesheet" href="../static/css/todo.css"> -->
+</head>
+<body>
+  <style>
+  </style>
+  <h3>ようこそ！</h3>
+  <form action="{% url 'todo_add' %}" method="POST">
+    {% csrf_token %}
+    <div>
+      <label for="form_title">キャラ名:犬</label>
+    </div>
+      <label for="form_deadline">経験値</label>
+  </form>
+
+  <a href="{% url 'hello' %}">戻る</a>
+</body>
+</html>
