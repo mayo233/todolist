@@ -5,10 +5,10 @@
   <body>
     {% for data in records %}
     {{ data.id }}
-    {{ data.time }}
-    {{ data.created_at }}<br>
+    {{ data.created_at }}
+    {{ data.time|date:"G時i分s秒" }}<br>
     {% endfor %}
   </body>
   <a href="{% url 'hello' %}">戻る</a>
-
+  
 </html>
