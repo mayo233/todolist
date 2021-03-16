@@ -17,7 +17,7 @@ def callback(request):
     if request.method != 'POST':
         return HttpResponse('ん？なんやようか？', status=405)
 
-    print('sample')
+    HttpResponse('test1')
     signature = request.META['HTTP_X_LINE_SIGNATURE']
     body = request.body.decode('utf-8')
     try:
@@ -27,12 +27,14 @@ def callback(request):
     except LineBotApiError:
         return HttpResponseBadRequest()
 
+    HttpResponse('test2')
     for event in events:
         if not isinstance(event, MessageEvent):
             continue
         if not isinstance(event.message, TextMessage):
             continue
 
+        HttpResponse('test3')
         text_send_message = TextSendMessage(text=event.message.text)
         line_bot_api.reply_message(
             event.reply_token,
