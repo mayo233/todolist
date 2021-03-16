@@ -22,4 +22,6 @@ urlpatterns = [
     path('timer/', include('timer.urls')),
     path('record/', include('record.urls')),
     path('callback/', include('callback.urls')),
+    path('chara/', include('chara.urls')),
+    
 ]

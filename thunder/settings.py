@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'timer',
     'record',
     'callback',
+    'chara',
 ]
 
 MIDDLEWARE = [
