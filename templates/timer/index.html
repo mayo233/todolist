@@ -99,7 +99,7 @@
 
     //画面の時間表示
     const view = (value) => {
-      let hour = 0;
+      let hour = Math.floor(value/(60*60*1000));
       let min = Math.floor(value / (60 * 1000));
       let sec = Math.floor(value % (60 * 1000) / 1000);
       let minSec = value % 1000;
