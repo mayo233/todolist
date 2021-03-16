@@ -20,5 +20,6 @@ urlpatterns = [
     path('', include('liff.urls')),
     path('todo/', include('todo.urls')),
     path('timer/', include('timer.urls')),
+    path('record/', include('record.urls')),
     path('callback/', include('callback.urls')),
 ]

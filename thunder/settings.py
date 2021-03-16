@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'liff',
     'todo',
     'timer',
+    'record',
     'callback',
 ]
 
