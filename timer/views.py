@@ -6,9 +6,8 @@ import time
 from .models import Timer
 
 def index(request):
-    # テスト用
-    records = Timer.objects.all()
-    return render(request, 'timer/index.html', {'records': records})
+    message = ''
+    return render(request, 'timer/index.html', {'message': message})
 
 
 def store(request):
@@ -17,4 +16,6 @@ def store(request):
         created_at = request.POST['created_at'],
     )
     timer.save()
-    return HttpResponseRedirect(reverse('timer_index', args=()))
+
+    message = '保存に成功しました'
+    return render(request, 'timer/index.html', {'message': message})
