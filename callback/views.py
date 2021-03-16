@@ -14,8 +14,8 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 # Create your views here.
 @csrf_exempt
 def callback(request):
-    if request.method != 'POST':
-        return HttpResponse('ん？なんやようか？', status=405)
+    # if request.method != 'POST':
+    #     return HttpResponse('ん？なんやようか？', status=405)
 
     HttpResponse('test1')
     signature = request.META['HTTP_X_LINE_SIGNATURE']
