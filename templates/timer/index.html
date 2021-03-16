@@ -4,14 +4,24 @@
     <base target="_top">
   </head>
   <body>
-    <!-- <form method="POST">
-      {% csrf_token %} -->
-      <div class='timer'>00:00.000</div>
-      <button class='start-stop' name = "start">スタート</button>
-      <!-- <button class='stop' name = "stop">ストップ</button> -->
-      <button class='reset'>リセット</button>
-      <input type="submit" value="保存">
-    <!-- </form> -->
+
+    {% for data in records %}
+    {{ data.id }}
+    {{ data.time }}
+    {{ data.created_at }}<br>
+    {% endfor %}
+
+    <div class='timer'>00:00:00.000</div>
+    <button class='start-stop' name = "start">スタート</button>
+    <!-- <button class='stop' name = "stop">ストップ</button> -->
+    <button class='reset'>リセット</button>
+
+    <form method="POST" action="{% url 'timer_store' %}">
+      {% csrf_token %}
+      <input class="time_data" type="hidden" name="time">
+      <input class="created_at_data" type="hidden" name="created_at">
+      <input class="store" type="submit" value="保存">
+    </form>
     <!-- <?!= HtmlService.createHtmlOutputFromFile('js').getContent(); ?> -->
 
   <a href="{% url 'hello' %}">戻る</a>
@@ -19,6 +29,8 @@
 
   <!-- <script src="../../static/js/timer.js"></script> -->
   <script>
+
+    var total;
 
     //Appクラス
     class App {
@@ -29,10 +41,29 @@
 
       mount() {
         const startStopElement = document.querySelector('.start-stop');
-        const StopElement = document.querySelector('.stop');
+        // const StopElement = document.querySelector('.stop');
         const resetElement = document.querySelector('.reset');
+
+        var f_flag = true;
+
         //startStopボタンを押したとき
         startStopElement.addEventListener("click", () => {
+
+          if(f_flag === true)
+          {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            var hour = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            document.querySelector('.created_at_data').value = year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+
+            f_flag = false;
+          }
+
           //ストップウォッチが止まっているとき
           if(this.stopwatch.isStop) {
             //ストップウォッチを動かす
@@ -44,6 +75,7 @@
             this.stopwatch.stop();
             //ボタン表示をスタートに
             startStopElement.textContent = "スタート";
+            document.querySelector('.time_data').value = total;
           }
         });
         // stopElement.addEventListener("click", () => {
@@ -67,6 +99,7 @@
 
     //画面の時間表示
     const view = (value) => {
+      let hour = 0;
       let min = Math.floor(value / (60 * 1000));
       let sec = Math.floor(value % (60 * 1000) / 1000);
       let minSec = value % 1000;
@@ -79,7 +112,9 @@
 
       //timerの表示を書き換え
       const timerElement = document.querySelector('.timer');
-      timerElement.textContent = `${min}:${sec}.${minSec}`;
+      timerElement.textContent = `${hour}:${min}:${sec}.${minSec}`;
+
+      total = hour + ':' + min + ':' +  sec + '.' + minSec;
     };
 
     //stopwatchクラス

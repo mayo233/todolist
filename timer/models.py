@@ -1,5 +1,4 @@
 from django.db import models
-class timer(models.Model):
-    start = models.IntegerField()
-    stop = models.IntegerField()
-    time = models.IntegerField()
+class Timer(models.Model):
+    time = models.TimeField()
+    created_at = models.DateTimeField('作成日時')

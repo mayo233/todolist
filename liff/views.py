@@ -2,7 +2,7 @@ from django.http.response import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render
 import json
 from django.views.decorators.csrf import csrf_exempt
-from .models import EmailPush, LinePush
+from .models import LinePush
 
 # Create your views here.
 def index(request):
